@@ -32,7 +32,7 @@ RUN apk  --update \
         -e "s/^memory_limit\s*=.*/memory_limit = -1/" \
         -e "s/^max_input_time\s*=.*/max_input_time = 0/" /etc/php7/php.ini && \
 
-    apk del --purge make g++ autoconf libtool && \
+    apk del --purge make g++ autoconf libtool imagemagick-dev php7-dev icu-dev && \
     rm -rf /var/cache/apk/* && \
     rm -rf /imagick-${IMAGICK_VERSION}
 
