@@ -29,6 +29,8 @@ RUN echo "date.timezone= Europe/Paris" >>  /etc/php7/php.ini && \
         -e "s/^memory_limit\s*=.*/memory_limit = -1/" \
         -e "s/^max_input_time\s*=.*/max_input_time = 0/" /etc/php7/php.ini
 
+RUN apk del --purge make g++ autoconf libtool
+
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
 
