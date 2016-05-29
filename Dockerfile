@@ -3,9 +3,14 @@ MAINTAINER Jacques Moati <jacques@moati.net>
 
 ENV IMAGICK_VERSION=3.4.1
 
-RUN apk add --update \
-            --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
-            imagemagick-dev make g++ autoconf php7-dev libtool php7-fpm php7-amqp php7-zlib php7-zip php7-sqlite3 php7-xml php7-sockets php7-pcntl php7-openssl php7-mysqlnd php7-phar php7-mcrypt php7-session  php7-opcache php7-posix php7-curl  php7-gettext php7-json php7-mbstring php7-exif php7-iconv php7-intl php7-bcmath php7-bz2 php7-pdo_mysql
+
+RUN apk  --update \
+         --repository http://dl-3.alpinelinux.org/alpine/edge/main/ \
+         add icu icu-dev
+
+RUN apk --update \
+        --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
+        add imagemagick-dev make g++ autoconf php7-dev libtool php7-fpm php7-amqp php7-zlib php7-zip php7-sqlite3 php7-xml php7-sockets php7-pcntl php7-openssl php7-mysqlnd php7-phar php7-mcrypt php7-session php7-opcache php7-posix php7-curl php7-gettext php7-json php7-mbstring php7-exif php7-iconv php7-intl php7-bcmath php7-bz2 php7-pdo_mysql
 
 
 RUN cd / && \
