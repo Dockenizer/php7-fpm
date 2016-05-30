@@ -9,7 +9,7 @@ RUN apk  --update \
 
     apk --update \
         --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
-        add imagemagick-dev make g++ autoconf php7-dev libtool php7-fpm php7-amqp php7-zlib php7-zip php7-sqlite3 php7-xml php7-sockets php7-pcntl php7-openssl php7-mysqlnd php7-phar php7-mcrypt php7-session php7-opcache php7-posix php7-curl php7-gettext php7-json php7-mbstring php7-exif php7-iconv php7-intl php7-bcmath php7-bz2 php7-pdo_mysql && \
+        add imagemagick-dev make g++ autoconf php7-dev libtool php7-fpm php7-amqp php7-dom php7-zlib php7-ctype php7-zip php7-sqlite3 php7-xml php7-sockets php7-pcntl php7-openssl php7-mysqlnd php7-phar php7-mcrypt php7-session php7-opcache php7-posix php7-curl php7-gettext php7-json php7-mbstring php7-exif php7-iconv php7-intl php7-bcmath php7-bz2 php7-pdo_mysql && \
 
     cd / && \
     curl https://pecl.php.net/get/imagick-${IMAGICK_VERSION}.tgz | tar zxv && \
@@ -21,6 +21,8 @@ RUN apk  --update \
     echo "extension=imagick.so" > /etc/php7/conf.d/imagick.ini && \
 
     sed -i '/daemonize /c daemonize = no' /etc/php7/php-fpm.conf && \
+    sed -i '/^user /c user = www-data' /etc/php7/php-fpm.d/www.conf && \
+    sed -i '/^group /c group = www-data' /etc/php7/php-fpm.d/www.conf && \
     sed -i '/^listen /c listen = 0.0.0.0:9000' /etc/php7/php-fpm.d/www.conf && \
     sed -i 's/^listen.allowed_clients/;listen.allowed_clients/' /etc/php7/php-fpm.d/www.conf && \
 
@@ -31,6 +33,8 @@ RUN apk  --update \
         -e "s/^upload_max_filesize\s*=.*/upload_max_filesize = 10G\nupload_max_size = 10G/" \
         -e "s/^memory_limit\s*=.*/memory_limit = -1/" \
         -e "s/^max_input_time\s*=.*/max_input_time = 0/" /etc/php7/php.ini && \
+
+    adduser www-data -h /var/www -D && \
 
     apk del --purge make g++ autoconf libtool imagemagick-dev php7-dev icu-dev && \
     rm -rf /var/cache/apk/* && \
