@@ -37,8 +37,8 @@ RUN apk  --update \
     adduser www-data -h /var/www -D && \
 
     apk del --purge make g++ autoconf libtool imagemagick-dev php7-dev icu-dev && \
-    rm -rf /var/cache/apk/* && \
-    rm -rf /imagick-${IMAGICK_VERSION}
+    rm -rf /var/cache/apk/* # && \
+    #rm -rf /imagick-${IMAGICK_VERSION}
 
 
 COPY run.sh /run.sh
