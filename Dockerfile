@@ -35,6 +35,7 @@ RUN apk  --update \
         -e "s/^max_input_time\s*=.*/max_input_time = 0/" /etc/php7/php.ini && \
 
     adduser www-data -h /var/www -D && \
+    ln -s /usr/bin/php7 /usr/bin/php && \
 
     apk del --purge make g++ autoconf libtool php7-dev icu-dev && \
     rm -rf /var/cache/apk/* && \
