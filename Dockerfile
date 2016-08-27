@@ -1,15 +1,21 @@
 FROM dockenizer/alpine
 MAINTAINER Jacques Moati <jacques@moati.net>
 
-ENV IMAGICK_VERSION=3.4.1
+ENV IMAGICK_VERSION=3.4.3RC1
 
 RUN apk  --update \
+         --repository http://dl-3.alpinelinux.org/alpine/v3.4/main/ \
          --repository http://dl-3.alpinelinux.org/alpine/edge/main/ \
-         add icu icu-dev && \
+         --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
+         --repository http://dl-3.alpinelinux.org/alpine/edge/community/ \
+         upgrade && \
 
-    apk --update \
-        --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
-        add imagemagick-dev curl make g++ autoconf php7-dev libtool php7-fpm php7-amqp php7-gd php7-dom php7-zlib php7-ctype php7-zip php7-sqlite3 php7-xml php7-sockets php7-pcntl php7-openssl php7-mysqlnd php7-phar php7-mcrypt php7-session php7-opcache php7-posix php7-curl php7-gettext php7-json php7-mbstring php7-exif php7-iconv php7-intl php7-bcmath php7-bz2 php7-pdo_mysql perl && \
+    apk  \
+         --repository http://dl-3.alpinelinux.org/alpine/v3.4/main/ \
+         --repository http://dl-3.alpinelinux.org/alpine/edge/main/ \
+         --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
+         --repository http://dl-3.alpinelinux.org/alpine/edge/community/ \
+        add icu icu-dev curl libtool imagemagick-dev make g++ autoconf php7-amqp php7-dev php7-fpm php7-gd php7-dom php7-zlib php7-ctype php7-zip php7-sqlite3 php7-xml php7-sockets php7-pcntl php7-openssl php7-mysqlnd php7-phar php7-mcrypt php7-session php7-opcache php7-posix php7-curl php7-gettext php7-json php7-mbstring php7-exif php7-iconv php7-intl php7-bcmath php7-bz2 php7-pdo_mysql perl && \
 
     cd / && \
     curl https://pecl.php.net/get/imagick-${IMAGICK_VERSION}.tgz | tar zxv && \
