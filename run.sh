@@ -5,4 +5,4 @@ then
     usermod -u $uid www-data
 fi
 
-php-fpm7
+php-fpm
