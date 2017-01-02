@@ -14,7 +14,7 @@ RUN apk --repository http://dl-3.alpinelinux.org/alpine/edge/community/ \
     pecl install imagick amqp && \
     docker-php-ext-enable imagick amqp && \
 
-    apk del --purge make g++ autoconf libtool icu-dev rabbitmq-c-dev imagemagick-dev freetype-dev libjpeg-turbo-dev libmcrypt-dev libpng-dev && \
+    apk del --purge make g++ autoconf libtool && \
     rm -rf /var/cache/apk/*
 
 COPY run.sh /run.sh
