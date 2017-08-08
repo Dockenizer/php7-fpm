@@ -195,8 +195,10 @@ EXPOSE 9000
 WORKDIR /var/www/
 
 RUN apk --update \
-        add bash  openssl icu icu-dev curl libtool imagemagick-dev make g++ autoconf perl rabbitmq-c-dev freetype-dev libjpeg-turbo-dev libmcrypt-dev libpng-dev pcre-dev libxml2-dev ttf-freefont libgcc libstdc++ libx11 glib libxrender libxext libintl libcrypto1.0 libssl1.0 ttf-dejavu ttf-droid ttf-freefont ttf-liberation ttf-ubuntu-font-family && \
-
+        add bash openssl icu icu-dev curl libtool imagemagick-dev make g++ autoconf perl rabbitmq-c-dev freetype-dev libjpeg-turbo-dev libmcrypt-dev libpng-dev pcre-dev libxml2-dev ttf-freefont libgcc libstdc++ libx11 glib libxrender libxext libintl libcrypto1.0 libssl1.0 ttf-dejavu ttf-droid ttf-freefont ttf-liberation ttf-ubuntu-font-family && \
+    apk --update \
+        --repository http://dl-3.alpinelinux.org/alpine/edge/community/ \
+        add jpegoptim && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
     docker-php-ext-install iconv mcrypt gd bcmath exif intl opcache pcntl sockets zip pdo_mysql soap calendar mysqli && \
     pecl install imagick amqp redis && \
