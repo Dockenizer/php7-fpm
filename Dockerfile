@@ -201,8 +201,8 @@ RUN apk --update \
         add jpegoptim && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
     docker-php-ext-install iconv mcrypt gd bcmath exif intl opcache pcntl sockets zip pdo_mysql soap calendar mysqli && \
-    pecl install imagick amqp redis && \
-    docker-php-ext-enable imagick amqp redis && \
+    pecl install imagick amqp redis memcached && \
+    docker-php-ext-enable imagick amqp redis memcached && \
 
     apk del --purge make g++ autoconf libtool && \
     rm -rf /var/cache/apk/*
